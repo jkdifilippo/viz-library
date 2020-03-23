@@ -1,0 +1,30 @@
+---
+title: "ggplot2 examples"
+author: "James"
+output: bookdown::gitbook
+header-includes: \usepackage{float}
+---
+# Required Packages
+
+```{r options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = "H")
+
+set.seed(seed = 999)
+```
+
+
+```{r dependencies, echo=T, message = FALSE, warning = FALSE}
+# Tidyverse includes ggplot2
+library(tidyverse)
+
+# Scales
+library(scales)
+
+# theme packages give you more theme options than base ggplot2
+library(ggthemes)
+library(hrbrthemes)
+library(cowplot)
+
+# package can be used to easily install system fonts into R (use funtion font_import)
+library(extrafont)
+```

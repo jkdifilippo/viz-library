@@ -1,0 +1,47 @@
+# Barplot
+
+```{r include=FALSE}
+library(tidyverse)
+```
+
+(ref:barchart) Bar chart of dummy fruit data
+```{r echo=TRUE, fig.cap = "(ref:barchart)", fig.asp=0.5, dpi=300, out.width="100%"}
+
+# create dummy categorical data
+categorical_data <- 
+  tibble(fruit = c("apples", "pears", "banannas", "pinapples", "cherries", "peaches"),
+         quantity = c(10, 15, 30, 45, 60, 75)) %>% 
+  
+  # for categorical graphs its often useful to make the category a factor. This lets
+  # you control the order by which it appears on the plot. Below we use fct_reorder
+  # from the forcats package to reorder the fruit variable by the quantity of fruit.
+  mutate(fruit = forcats::fct_reorder(fruit, quantity))
+
+
+
+# barchart
+
+# ggplot is the first command for any ggplot2 plot. data and aestetics aes()
+# can be defined here or in any individual geom_*(function) 
+ggplot(data = categorical_data, aes(x = fruit, y = quantity)) +
+  
+  # geom_bar takes a quantity from a "tidy" dataset, here we just have one
+  # category-value pair so we use geom_col instead
+  geom_col(fill = "steelblue") +
+  
+  # themes change the overall look of the plot. these can also be modified
+  # further if need be (also can use packaged themes like theme_economist)
+  theme_minimal() +
+  
+  # coord_flip flips the x and y axis which is useful for making bar charts
+  # with lots of values. Omit to make normal bar chart
+  coord_flip() +
+  
+  xlab("")+ # no label
+  
+  # title the plot, can also have a subtitle
+  ggtitle(label = "bar plot",
+          subtitle = "horizontal variant")
+
+```
+
