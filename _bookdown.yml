@@ -2,7 +2,4 @@ book_filename: "ggplot2-reference"
 output: 
   bookdown::gitbook
 output_dir: "docs"
-language:
-  ui:
-    chapter_name: "Chapter "
 delete_merged_file: true

@@ -4,7 +4,9 @@ author: "James"
 output: bookdown::gitbook
 header-includes: \usepackage{float}
 ---
-# Required Packages
+# ggplot2 packages
+
+The below packages are required to to recreate the example plots in this reference. They also represent a helpful list of useful packages for extending ggplot2
 
 ```{r options, include=FALSE}
 knitr::opts_chunk$set(fig.pos = "H")

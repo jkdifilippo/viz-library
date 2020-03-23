@@ -1,20 +1,6 @@
-# Line plot
+# Line plots
 
-```{r include=FALSE}
-# Tidyverse includes ggplot2
-library(tidyverse)
-
-# Scales
-library(scales)
-
-# theme packages give you more theme options than base ggplot2
-library(ggthemes)
-library(hrbrthemes)
-library(cowplot)
-
-# package can be used to easily install system fonts into R (use funtion font_import)
-library(extrafont)
-```
+## connected dot time series  
 
 (ref:lineplot) Example of a line plot of random time series data
 ```{r echo=TRUE, fig.cap= "(ref:lineplot)", fig.asp=0.5, dpi=300, out.width="100%"}
@@ -63,6 +49,8 @@ ggplot(data = time_series, aes(x = year, y = variable, color = series)) +
           subtitle = "series A and B")
 
 ```
+
+## High freqeuncy time series
 
 (ref:time-series) Example of multiple high frequency times series data
 ```{r time-series, echo=TRUE, fig.cap= "(ref:time-series)", fig.asp=0.7, dpi=300, out.width="100%"}
@@ -134,8 +122,8 @@ ggplot(data = time_series, aes(x = date, y = variable, color = series)) +
                expand = c(0, 0),
                breaks = pretty_breaks(9)) +
   
-  # theme_ipsum comes from the hrbrthemes package. In this theme function
-  # font family and font size can be adjusted using arguments
+  # theme_modern_rc comes from the hrbrthemes package. In this theme function
+  # font family and font size can be adjusted using arguments.
   theme_modern_rc(base_size = 10) +
   
   # Because the plot is directly labeled, we dont need a legend.

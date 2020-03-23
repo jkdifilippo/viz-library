@@ -1,4 +1,4 @@
-# Scatterplot
+# Scatterplots
 
 ```{r include=FALSE}
 library(tidyverse)
