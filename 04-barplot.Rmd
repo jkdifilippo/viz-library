@@ -1,16 +1,18 @@
-# Barplot
+# Quantities
 
 ```{r include=FALSE}
 library(tidyverse)
 ```
 
+
+## bar chart
 (ref:barchart) Bar chart of dummy fruit data
 ```{r echo=TRUE, fig.cap = "(ref:barchart)", fig.asp=0.5, dpi=300, out.width="100%"}
 
 # create dummy categorical data
 categorical_data <- 
   tibble(fruit = c("apples", "pears", "banannas", "pinapples", "cherries", "peaches"),
-         quantity = c(10, 15, 30, 45, 60, 75)) %>% 
+         quantity = runif(6, 5, 70)) %>% 
   
   # for categorical graphs its often useful to make the category a factor. This lets
   # you control the order by which it appears on the plot. Below we use fct_reorder
@@ -37,7 +39,7 @@ ggplot(data = categorical_data, aes(x = fruit, y = quantity)) +
   # with lots of values. Omit to make normal bar chart
   coord_flip() +
   
-  xlab("")+ # no label
+  xlab(NULL)+
   
   # title the plot, can also have a subtitle
   ggtitle(label = "bar plot",
@@ -45,3 +47,53 @@ ggplot(data = categorical_data, aes(x = fruit, y = quantity)) +
 
 ```
 
+(ref:multibar) Bar chart of food quanity separated by food type
+```{r echo=TRUE, fig.cap = "(ref:multibar)", fig.asp=0.5, dpi=300, out.width="100%"}
+multi_categorical_data <- 
+bind_rows(  
+  
+  tibble(
+    type = "meat",
+    food = c("steak", "bacon", "chicken", "turkey"),
+    quantity = (runif(4, 1, 25) %>% round(0))),
+  
+  tibble(type = "dairy",
+         food = c("cheese", "milk", "cream"),
+         quantity =(runif(3, 1, 25) %>% round(0))),
+  
+  tibble(type = "produce",
+         food = c("tomato", "lettuce", "carrot", "broccoli", "cucumber", "banana", "pear"),
+         quantity =(runif(7, 1, 25) %>% round(0)))
+  
+  ) %>% 
+
+mutate(food = forcats::fct_reorder(food, quantity))
+
+multi_categorical_data %>% 
+ggplot(aes(x = food, y = quantity)) +
+
+    geom_col(aes(fill = type), color = NA, width = 0.8) + 
+
+    coord_flip() +
+  
+    scale_fill_brewer(type = "qual", palette = "Set2") +
+    
+    xlab(NULL) +
+    scale_y_continuous(
+         name = NULL,
+         expand = c(0, 0),
+         limits = c(0, max(multi_categorical_data$quantity) * 1.1),
+         breaks = pretty_breaks(6)) +
+    
+    theme_cowplot(font_size = 11) +
+    theme(axis.line.y = element_blank(),
+          axis.ticks = element_blank(),
+          legend.title = element_blank(),
+          legend.position = "bottom") +
+  
+    ggtitle(label = "multi-category bar chart",
+            subtitle = "horizontal")
+
+  
+
+```
