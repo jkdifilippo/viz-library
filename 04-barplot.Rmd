@@ -88,10 +88,12 @@ ggplot(aes(x = food, y = quantity)) +
     # Set color to NA to remove border from bars.
     geom_col(aes(fill = type), color = NA, width = 0.8) + 
     
-    # apply the qualitative colorbrewer palette "Set2"
-    scale_fill_brewer(type = "qual", palette = "Set2") +
+    # use the wesanderson package (based on movie schemes) to add moonrise2 palette
+    # to graph. The wes_palette() function returns a vector of color values which
+    # is then applied to scale_fill_manual
+    scale_fill_manual(values = wes_palette("Moonrise2", n = 3)) +
     
-    
+    # no x label
     xlab(NULL) +
     
     # modify the y scale so that it doesnt expand and so that the limits of 
