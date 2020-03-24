@@ -22,10 +22,13 @@ library(tidyverse)
 # Scales
 library(scales)
 
-# theme packages give you more theme options than base ggplot2
+# theme packages give you more theme (and some color palette) options than base ggplot2
 library(ggthemes)
 library(hrbrthemes)
 library(cowplot)
+
+# color palettes
+library(wesanderson)
 
 # package can be used to easily install system fonts into R (use funtion font_import)
 library(extrafont)
