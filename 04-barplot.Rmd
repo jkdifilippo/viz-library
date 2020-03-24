@@ -47,7 +47,9 @@ ggplot(data = categorical_data, aes(x = fruit, y = quantity)) +
 
 ```
 
-(ref:multibar) Bar chart of food quanity separated by food type
+# Color category barplot
+
+(ref:multibar) Bar chart of quantities where individual observations are grouped into categories by color.
 ```{r echo=TRUE, fig.cap = "(ref:multibar)", fig.asp=0.5, dpi=300, out.width="100%"}
 
 # create a randomish set of categorical data

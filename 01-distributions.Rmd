@@ -1,6 +1,6 @@
 # Distribution Plots
 
-## histogram
+## Histogram
 
 (ref:histogram) Histogram of a normally distributed variable
 ```{r histogram, fig.cap = "(ref:histogram)", echo=TRUE, fig.asp=0.5, dpi= 300, out.width="100%"}
@@ -118,4 +118,50 @@ ggplot(aes(x = variable)) +
 
 ```
 
+
+
+
+```{r}
+create_distribution <- function(peaks = 1,
+                                mean_min = 1, 
+                                mean_max = 50,
+                                sd_min = 1,
+                                sd_max = 10,
+                                obs_min = 500,
+                                obs_max = 1000) {
+  rand_obs <- function() {runif(1, min = obs_min, max = obs_max) %>% round(0)}
+  rand_mean <- function() {runif(1, min = mean_min, max = mean_max) %>% round(0)}
+  rand_sd <- function() {runif(1, min = sd_min, max = sd_max) %>% round(0)}
+  vector <- c()
+  for (x in 1:peaks) {
+    distribution <- rnorm(rand_obs(), rand_mean(), rand_sd())
+    vector <- c(vector, distribution)
+  }
+  out <- vector
+}
+
+distributions <- bind_rows(
+  tibble(set = "set 1", value = create_distribution(1)),
+  tibble(set = "set 2", value = create_distribution(1)),
+  tibble(set = "set 3", value = create_distribution(2)),
+  tibble(set = "set 4", value = create_distribution(2)),
+  tibble(set = "set 5", value = create_distribution(3)),
+  tibble(set = "set 6", value = create_distribution(3))
+) %>% 
+
+group_by(set) %>% 
+mutate(order = mean(value)) %>% 
+ungroup() %>%  
+mutate(set = fct_reorder(set, order))
+
+
+     
+
+ggplot(distributions, aes(y = value, x = set)) +
+  
+  geom_violin() +
+  geom_point(position = position_jitter(height = 0.1), size = 0.1, alpha = 0.5) +
+  
+
+```
 

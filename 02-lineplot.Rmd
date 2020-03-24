@@ -65,10 +65,10 @@ drunkards_walk <- function(x, y, za, zb) {
   
     for (n in 1:(y - 1)) {
       x <- x + runif(1, za, zb)
-      values <- rbind(values, x)
+      values <- c(value, x)
     }
   
-    out <- values %>% as.vector() 
+    out <- values 
  }
 
 # generate a set of time series data over 1500 days
